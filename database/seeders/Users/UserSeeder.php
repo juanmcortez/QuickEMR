@@ -3,6 +3,7 @@
 namespace Database\Seeders\Users;
 
 use App\Models\Users\User;
+use App\Models\Common\Email;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -11,6 +12,9 @@ class UserSeeder extends Seeder
     {
         User::factory()
             ->count(fake()->randomNumber(1, true))
-            ->create();
+            ->create()
+            ->after(function ($user) {
+                Email::factory()->create();
+            });
     }
 }
