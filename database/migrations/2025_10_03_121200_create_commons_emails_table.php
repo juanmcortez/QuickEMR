@@ -10,9 +10,9 @@ return new class extends Migration {
         Schema::create('commons_emails', function (Blueprint $table) {
             $table->id();
 
-            $table->string('address')->nullable();
+            $table->string('address', 128)->unique()->index();
             $table->dateTime('verified_at')->nullable();
-            
+
             $table->timestamps();
             $table->softDeletes();
         });

@@ -23,6 +23,7 @@ class EmailFactory extends Factory
         return [
             'address' => fake()->unique()->safeEmail(),
             'verified_at' => now(),
+            // 
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];
