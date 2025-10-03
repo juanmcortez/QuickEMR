@@ -3,9 +3,11 @@
 namespace App\Models\Users;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Common\Profile;
 use Illuminate\Notifications\Notifiable;
 use Database\Factories\Users\UserFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -22,11 +24,19 @@ class User extends Authenticatable
     protected $primaryKey = 'uid';
 
     /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['profile'];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
     protected $fillable = [
+        'profile_id',
         'username',
         'password',
     ];
@@ -38,8 +48,10 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'uid',
+        'profile_id',
         'password',
         'remember_token',
+        'created_at',
         'updated_at',
         'deleted_at',
     ];
@@ -61,7 +73,17 @@ class User extends Authenticatable
     {
         return [
             'password' => 'hashed',
-            'created_at' => 'datetime:M d, Y H:i',
         ];
+    }
+
+    /**
+     * Get the email relationship
+     *
+     * @return HasOne
+     */
+    public function profile(): hasOne
+    {
+        return $this->hasOne(Profile::class, 'id', 'profile_id')
+            ->withDefault();
     }
 }
