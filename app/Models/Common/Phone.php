@@ -2,10 +2,10 @@
 
 namespace App\Models\Common;
 
-use Attribute;
 use App\Enum\PhoneType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Phone extends Model
@@ -72,17 +72,15 @@ class Phone extends Model
      *
      * @var array
      */
-    protected $appends = ['full_number'];
+    protected $appends = ['formatted'];
 
     /**
-     * Verified at accessor and mutator.
-     *
-     * @return Attribute
+     * Accessor / mutator for the formatted field.
      */
-    protected function fullNumber(): Attribute
+    protected function formatted(): Attribute
     {
         return Attribute::make(
-            get: static fn() => $this->country_code.' ('.$this->area_code.') '.$this->number_code.'-'.$this->number_line,
+            get: fn() => $this->country_code.' ('.$this->area_code.') '.$this->number_code.'-'.$this->number_line." (".$this->type->name.")",
         );
     }
 }

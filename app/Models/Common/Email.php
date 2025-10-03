@@ -2,9 +2,10 @@
 
 namespace App\Models\Common;
 
-use Attribute;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Email extends Model
@@ -51,15 +52,15 @@ class Email extends Model
     }
 
     /**
-     * Verified at accessor and mutator.
-     *
-     * @return Attribute
+     * Accessor / mutator for the verifiedAt field.
      */
     protected function verifiedAt(): Attribute
     {
         return Attribute::make(
-            get: static fn($value) => \Carbon\Carbon::parse($value)->format('M d, Y'),
-            set: static fn($value) => \Carbon\Carbon::createFromFormat('M d, Y', $value)->format('Y-m-d H:i:s'),
+            get: static fn($value) => Carbon::parse($value)->format('M d, Y'),
+            set: static fn($value) => is_string($value)
+                ? Carbon::parse($value)->format('Y-m-d')
+                : $value,
         );
     }
 }
