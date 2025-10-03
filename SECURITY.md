@@ -10,4 +10,6 @@
 
 ## Reporting a Vulnerability
 
-Coming soon.
+If you discover a security vulnerability within QuickEMR, please send an e-mail to Juan Manuel Cortéz
+via [juanm.cortez@gmail.com](mailto:juanm.cortez@gmail.com). All
+security vulnerabilities will be promptly addressed. You can also add an issue in out Github repository.
