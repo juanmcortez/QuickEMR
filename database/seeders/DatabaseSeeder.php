@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Database\Seeders\Users\UserSeeder;
+use Database\Seeders\Patients\PatientSeeder;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -17,6 +18,7 @@ class DatabaseSeeder extends Seeder
         // Seed the models
         $this->call([
             UserSeeder::class,
+            PatientSeeder::class,
         ]);
     }
 }
