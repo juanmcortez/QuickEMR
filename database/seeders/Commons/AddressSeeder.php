@@ -1,8 +1,8 @@
 <?php
 
-namespace Database\Seeders\Common;
+namespace Database\Seeders\Commons;
 
-use App\Models\Common\Address;
+use App\Models\Commons\Address;
 use Illuminate\Database\Seeder;
 
 class AddressSeeder extends Seeder

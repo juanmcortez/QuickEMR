@@ -2,7 +2,7 @@
 
 namespace Database\Factories\Patients;
 
-use App\Models\Common\Profile;
+use App\Models\Commons\Profile;
 use App\Models\Patients\Patient;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

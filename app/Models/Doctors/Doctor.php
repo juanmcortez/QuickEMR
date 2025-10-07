@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Patients;
+namespace App\Models\Doctors;
 
 use App\Models\Commons\Profile;
 use Illuminate\Database\Eloquent\Model;
@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Patient extends Model
+class Doctor extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -17,7 +17,7 @@ class Patient extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'pid';
+    protected $primaryKey = 'did';
 
     /**
      * The relationships that should always be loaded.
@@ -32,8 +32,8 @@ class Patient extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'profile_id',
-        'accession_number_ptlvl',
+        'did',
+        'job_title',
     ];
 
     /**
@@ -42,7 +42,7 @@ class Patient extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        'pid',
+        'did',
         'profile_id',
         'created_at',
         'updated_at',

@@ -1,13 +1,13 @@
 <?php
 
-namespace Database\Factories\Common;
+namespace Database\Factories\Commons;
 
 use App\Enum\PhoneType;
-use App\Models\Common\Email;
-use App\Models\Common\Phone;
-use App\Models\Common\Address;
-use App\Models\Common\Profile;
+use App\Models\Commons\Email;
+use App\Models\Commons\Phone;
 use Illuminate\Support\Carbon;
+use App\Models\Commons\Profile;
+use App\Models\Commons\Address;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProfileFactory extends Factory

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Models\Common;
+namespace App\Models\Commons;
 
-use Carbon\Carbon;
+use App\Enum\PhoneType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Email extends Model
+class Phone extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -17,7 +17,7 @@ class Email extends Model
      *
      * @var string
      */
-    protected $table = 'commons_emails';
+    protected $table = 'commons_phones';
 
     /**
      * The attributes that are mass assignable.
@@ -25,8 +25,13 @@ class Email extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'address',
-        'verified_at',
+        'is_primary',
+        'type',
+        'country_code',
+        'area_code',
+        'number_code',
+        'number_line',
+        'notes',
     ];
 
     /**
@@ -34,7 +39,17 @@ class Email extends Model
      *
      * @var array<int, string>
      */
-    protected $hidden = ['id', 'verified_at', 'created_at', 'updated_at', 'deleted_at'];
+    protected $hidden = [
+        'id',
+        'is_primary',
+        'country_code',
+        'area_code',
+        'number_code',
+        'number_line',
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
     /**
      * Get the attributes that should be cast.
@@ -44,7 +59,8 @@ class Email extends Model
     protected function casts(): array
     {
         return [
-            'verified_at' => 'datetime',
+            'is_primary' => 'boolean',
+            'type' => PhoneType::class,
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
@@ -52,15 +68,19 @@ class Email extends Model
     }
 
     /**
-     * Accessor / mutator for the verifiedAt field.
+     * The accessors to append to the model's array form.
+     *
+     * @var array
      */
-    protected function verifiedAt(): Attribute
+    protected $appends = ['formatted'];
+
+    /**
+     * Accessor / mutator for the formatted field.
+     */
+    protected function formatted(): Attribute
     {
         return Attribute::make(
-            get: static fn($value) => Carbon::parse($value)->format('M d, Y'),
-            set: static fn($value) => is_string($value)
-                ? Carbon::parse($value)->format('Y-m-d')
-                : $value,
+            get: fn() => $this->country_code.' ('.$this->area_code.') '.$this->number_code.'-'.$this->number_line." (".$this->type->name.")",
         );
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Database\Factories\Common;
+namespace Database\Factories\Commons;
 
-use App\Models\Common\Email;
+use App\Models\Commons\Email;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,7 +23,7 @@ class EmailFactory extends Factory
         return [
             'address' => fake()->unique()->safeEmail(),
             'verified_at' => now(),
-            // 
+            //
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

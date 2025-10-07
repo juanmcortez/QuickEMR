@@ -1,9 +1,9 @@
 <?php
 
-namespace Database\Factories\Common;
+namespace Database\Factories\Commons;
 
-use App\Models\Common\Address;
 use Illuminate\Support\Carbon;
+use App\Models\Commons\Address;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

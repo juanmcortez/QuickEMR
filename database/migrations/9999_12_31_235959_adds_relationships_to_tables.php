@@ -64,10 +64,29 @@ return new class extends Migration {
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
         });
+        //
+        Schema::table('doctors', static function (Blueprint $table) {
+            $table
+                ->bigInteger('profile_id')
+                ->unsigned()
+                ->nullable()
+                ->index()
+                ->after('did');
+
+            $table->foreign('profile_id')
+                ->references('id')
+                ->on('commons_profiles')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+        });
     }
 
     public function down(): void
     {
+        Schema::table('doctors', static function (Blueprint $table) {
+            $table->dropForeign('doctors_profile_id_foreign');
+        });
+        //
         Schema::table('patients', static function (Blueprint $table) {
             $table->dropForeign('patients_profile_id_foreign');
         });

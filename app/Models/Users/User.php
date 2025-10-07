@@ -3,7 +3,7 @@
 namespace App\Models\Users;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Common\Profile;
+use App\Models\Commons\Profile;
 use Illuminate\Notifications\Notifiable;
 use Database\Factories\Users\UserFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;

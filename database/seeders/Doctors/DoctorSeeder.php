@@ -1,15 +1,15 @@
 <?php
 
-namespace Database\Seeders\Common;
+namespace Database\Seeders\Doctors;
 
-use App\Models\Common\Email;
+use App\Models\Doctors\Doctor;
 use Illuminate\Database\Seeder;
 
-class EmailSeeder extends Seeder
+class DoctorSeeder extends Seeder
 {
     public function run(): void
     {
-        Email::factory()
+        Doctor::factory()
             ->count(fake()->randomNumber(1, true))
             ->create();
     }
