@@ -3,9 +3,11 @@
 namespace App\Models\Patients;
 
 use App\Models\Commons\Profile;
+use App\Models\Encounters\Encounter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Patient extends Model
@@ -24,7 +26,7 @@ class Patient extends Model
      *
      * @var array
      */
-    protected $with = ['profile'];
+    protected $with = ['profile', 'encounters'];
 
     /**
      * The attributes that are mass assignable.
@@ -58,5 +60,16 @@ class Patient extends Model
     {
         return $this->hasOne(Profile::class, 'id', 'profile_id')
             ->withDefault();
+    }
+
+    /**
+     * Get the encounter relationship
+     *
+     * @return HasMany
+     */
+    public function encounters(): HasMany
+    {
+        return $this->hasMany(Encounter::class, 'pid_enc', 'pid')
+            ->orderBy('date_of_service', 'desc');
     }
 }
