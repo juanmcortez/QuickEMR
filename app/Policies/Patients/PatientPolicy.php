@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Policies\Common;
+namespace App\Policies\Patients;
 
 use App\Models\Users\User;
-use App\Models\Common\Address;
+use App\Models\Patients\Patient;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class AddressPolicy
+class PatientPolicy
 {
     use HandlesAuthorization;
 
@@ -15,7 +15,7 @@ class AddressPolicy
         return true;
     }
 
-    public function view(User $user, Address $address): bool
+    public function view(User $user, Patient $patient): bool
     {
         return true;
     }
@@ -25,22 +25,22 @@ class AddressPolicy
         return true;
     }
 
-    public function update(User $user, Address $address): bool
+    public function update(User $user, Patient $patient): bool
     {
         return true;
     }
 
-    public function delete(User $user, Address $address): bool
+    public function delete(User $user, Patient $patient): bool
     {
         return true;
     }
 
-    public function restore(User $user, Address $address): bool
+    public function restore(User $user, Patient $patient): bool
     {
         return true;
     }
 
-    public function forceDelete(User $user, Address $address): bool
+    public function forceDelete(User $user, Patient $patient): bool
     {
         return true;
     }

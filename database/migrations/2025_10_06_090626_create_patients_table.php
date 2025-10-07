@@ -7,12 +7,11 @@ use Illuminate\Database\Migrations\Migration;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('commons_emails', function (Blueprint $table) {
-            $table->id();
-
-            $table->string('address', 128)->unique()->index();
-            $table->dateTime('verified_at')->nullable();
-
+        Schema::create('patients', function (Blueprint $table) {
+            $table->id('pid');
+            //
+            $table->string('accession_number_ptlvl', 64)->nullable();
+            //
             $table->timestamps();
             $table->softDeletes();
         });
@@ -20,6 +19,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('commons_emails');
+        Schema::dropIfExists('patients');
     }
 };

@@ -21,7 +21,7 @@ return new class extends Migration {
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
         });
-
+        //
         Schema::table('commons_profiles', static function (Blueprint $table) {
             $table->foreign('email_address_id')
                 ->references('id')
@@ -49,12 +49,30 @@ return new class extends Migration {
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
         });
+        //
+        Schema::table('patients', static function (Blueprint $table) {
+            $table
+                ->bigInteger('profile_id')
+                ->unsigned()
+                ->nullable()
+                ->index()
+                ->after('pid');
+
+            $table->foreign('profile_id')
+                ->references('id')
+                ->on('commons_profiles')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+        });
     }
 
     public function down(): void
     {
+        Schema::table('patients', static function (Blueprint $table) {
+            $table->dropForeign('patients_profile_id_foreign');
+        });
         //
-        Schema::table('commons_profiles', function (Blueprint $table) {
+        Schema::table('commons_profiles', static function (Blueprint $table) {
             $table->dropForeign('commons_profiles_secondary_phone_id_foreign');
             $table->dropForeign('commons_profiles_primary_phone_id_foreign');
             $table->dropForeign('commons_profiles_secondary_address_id_foreign');
@@ -62,7 +80,7 @@ return new class extends Migration {
             $table->dropForeign('commons_profiles_email_address_id_foreign');
         });
         //
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('users', static function (Blueprint $table) {
             $table->dropForeign('users_profile_id_foreign');
         });
     }
