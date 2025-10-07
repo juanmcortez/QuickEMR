@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Policies\Common;
+namespace App\Policies\Commons;
 
 use App\Models\Users\User;
-use App\Models\Common\Profile;
+use App\Models\Commons\Profile;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ProfilePolicy

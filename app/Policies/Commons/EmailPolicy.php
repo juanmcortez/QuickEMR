@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Policies\Common;
+namespace App\Policies\Commons;
 
 use App\Models\Users\User;
-use App\Models\Common\Phone;
+use App\Models\Commons\Email;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PhonePolicy
+class EmailPolicy
 {
     use HandlesAuthorization;
 
@@ -15,7 +15,7 @@ class PhonePolicy
         return true;
     }
 
-    public function view(User $user, Phone $phone): bool
+    public function view(User $user, Email $model): bool
     {
         return true;
     }
@@ -25,22 +25,22 @@ class PhonePolicy
         return true;
     }
 
-    public function update(User $user, Phone $phone): bool
+    public function update(User $user, Email $model): bool
     {
         return true;
     }
 
-    public function delete(User $user, Phone $phone): bool
+    public function delete(User $user, Email $model): bool
     {
         return true;
     }
 
-    public function restore(User $user, Phone $phone): bool
+    public function restore(User $user, Email $model): bool
     {
         return true;
     }
 
-    public function forceDelete(User $user, Phone $phone): bool
+    public function forceDelete(User $user, Email $model): bool
     {
         return true;
     }

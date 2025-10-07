@@ -2,7 +2,7 @@
 
 namespace App\Models\Patients;
 
-use App\Models\Common\Profile;
+use App\Models\Commons\Profile;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;

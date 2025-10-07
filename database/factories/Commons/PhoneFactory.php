@@ -1,9 +1,9 @@
 <?php
 
-namespace Database\Factories\Common;
+namespace Database\Factories\Commons;
 
 use App\Enum\PhoneType;
-use App\Models\Common\Phone;
+use App\Models\Commons\Phone;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

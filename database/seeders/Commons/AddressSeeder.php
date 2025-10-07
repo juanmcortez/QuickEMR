@@ -1,15 +1,15 @@
 <?php
 
-namespace Database\Seeders\Common;
+namespace Database\Seeders\Commons;
 
-use App\Models\Common\Email;
+use App\Models\Commons\Address;
 use Illuminate\Database\Seeder;
 
-class EmailSeeder extends Seeder
+class AddressSeeder extends Seeder
 {
     public function run(): void
     {
-        Email::factory()
+        Address::factory()
             ->count(fake()->randomNumber(1, true))
             ->create();
     }

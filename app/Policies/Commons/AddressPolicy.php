@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Policies\Common;
+namespace App\Policies\Commons;
 
 use App\Models\Users\User;
-use App\Models\Common\Address;
+use App\Models\Commons\Address;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class AddressPolicy

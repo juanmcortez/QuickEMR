@@ -4,7 +4,7 @@ namespace Database\Factories\Users;
 
 use App\Models\Users\User;
 use Illuminate\Support\Str;
-use App\Models\Common\Profile;
+use App\Models\Commons\Profile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
