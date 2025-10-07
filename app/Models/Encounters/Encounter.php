@@ -38,6 +38,7 @@ class Encounter extends Model
      */
     protected $fillable = [
         'date_of_service',
+        'date_of_entry',
         'date_of_service_to',
         'date_of_admission',
         'date_of_discharge',
@@ -63,6 +64,7 @@ class Encounter extends Model
     {
         return [
             'date_of_service' => 'timestamp',
+            'date_of_entry' => 'timestamp',
             'date_of_service_to' => 'date',
             'date_of_admission' => 'date',
             'date_of_discharge' => 'date',
