@@ -50,7 +50,7 @@ class Patient extends Model
     ];
 
     /**
-     * Get the email relationship
+     * Get the profile relationship
      *
      * @return HasOne
      */
