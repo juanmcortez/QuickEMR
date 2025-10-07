@@ -79,10 +79,85 @@ return new class extends Migration {
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
         });
+        //
+        Schema::table('encounters', static function (Blueprint $table) {
+            $table
+                ->bigInteger('pid_enc')
+                ->unsigned()
+                ->nullable()
+                ->index()
+                ->after('enc');
+
+            $table
+                ->bigInteger('rendering_id')
+                ->unsigned()
+                ->nullable()
+                ->index()
+                ->after('pid_enc');
+
+            $table
+                ->bigInteger('referring_id')
+                ->unsigned()
+                ->nullable()
+                ->index()
+                ->after('rendering_id');
+
+            $table
+                ->bigInteger('ordering_id')
+                ->unsigned()
+                ->nullable()
+                ->index()
+                ->after('referring_id');
+
+            $table
+                ->bigInteger('supervising_id')
+                ->unsigned()
+                ->nullable()
+                ->index()
+                ->after('ordering_id');
+
+            $table->foreign('pid_enc')
+                ->references('pid')
+                ->on('patients')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+
+            $table->foreign('rendering_id')
+                ->references('did')
+                ->on('doctors')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+
+            $table->foreign('referring_id')
+                ->references('did')
+                ->on('doctors')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+
+            $table->foreign('ordering_id')
+                ->references('did')
+                ->on('doctors')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+
+            $table->foreign('supervising_id')
+                ->references('did')
+                ->on('doctors')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+        });
     }
 
     public function down(): void
     {
+        Schema::table('encounters', static function (Blueprint $table) {
+            $table->dropForeign('encounters_pid_enc_foreign');
+            $table->dropForeign('encounters_rendering_id_foreign');
+            $table->dropForeign('encounters_referring_id_foreign');
+            $table->dropForeign('encounters_ordering_id_foreign');
+            $table->dropForeign('encounters_supervising_id_foreign');
+        });
+        //
         Schema::table('doctors', static function (Blueprint $table) {
             $table->dropForeign('doctors_profile_id_foreign');
         });
