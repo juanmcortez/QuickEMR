@@ -30,7 +30,11 @@
                 </thead>
                 <tbody align="center">
                 <tr>
-                    <td>{{ $encounter->enc }}</td>
+                    <td>
+                        <a href="{{ route('encounter.show', ['patient' => $patient->pid, 'encounter' => $encounter->enc]) }}">
+                            {{ $encounter->enc }}
+                        </a>
+                    </td>
                     <td>&nbsp;</td>
                     <td>{{ $encounter->date_of_service }}</td>
                     <td>&nbsp;</td>
@@ -40,25 +44,6 @@
                 </tr>
                 </tbody>
             </table>
-            {{--
-            @isset($encounter->rendering_id)
-                <div>{{ $encounter->rendering_doctor->profile->initials }}</div>
-                <div>{{ $encounter->rendering_doctor->profile->full_name }} [{{ $encounter->rendering_doctor->job_title }}]</div>
-            @endisset
-            @isset($encounter->referring_id)
-                <div>{{ $encounter->referring_doctor->profile->initials }}</div>
-                <div>{{ $encounter->referring_doctor->profile->full_name }} [{{ $encounter->referring_doctor->job_title }}]</div>
-            @endisset
-            @isset($encounter->ordering_id)
-                <div>{{ $encounter->ordering_doctor->profile->initials }}</div>
-                <div>{{ $encounter->ordering_doctor->profile->full_name }} [{{ $encounter->ordering_doctor->job_title }}]</div>
-            @endisset
-            @isset($encounter->supervising_id)
-                <div>{{ $encounter->supervising_doctor->profile->initials }}</div>
-                <div>{{ $encounter->supervising_doctor->profile->full_name }} [{{ $encounter->supervising_doctor->job_title }}]</div>
-            @endisset
-            --}}
-            <br/>
             @if($encounter->items->isNotEmpty())
                 <table width="50%">
                     <thead align="center">
