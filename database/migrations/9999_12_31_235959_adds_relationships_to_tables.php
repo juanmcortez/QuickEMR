@@ -146,10 +146,29 @@ return new class extends Migration {
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
         });
+        //
+        Schema::table('encounters_items', static function (Blueprint $table) {
+            $table
+                ->bigInteger('enc_itm')
+                ->unsigned()
+                ->nullable()
+                ->index()
+                ->after('itm');
+
+            $table->foreign('enc_itm')
+                ->references('enc')
+                ->on('encounters')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+        });
     }
 
     public function down(): void
     {
+        Schema::table('encounters_items', static function (Blueprint $table) {
+            $table->dropForeign('encounters_items_enc_itm_foreign');
+        });
+        //
         Schema::table('encounters', static function (Blueprint $table) {
             $table->dropForeign('encounters_pid_enc_foreign');
             $table->dropForeign('encounters_rendering_id_foreign');

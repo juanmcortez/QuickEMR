@@ -3,6 +3,7 @@
 namespace App\Models\Commons;
 
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -82,7 +83,7 @@ class Profile extends Model
      *
      * @var array
      */
-    protected $appends = ['full_name'];
+    protected $appends = ['full_name', 'initials'];
 
     /**
      * Accessor / mutator for the full_name field.
@@ -90,7 +91,19 @@ class Profile extends Model
     protected function fullName(): Attribute
     {
         return Attribute::make(
-            get: fn() => rtrim(ucfirst(strtolower($this->last_name)).', '.ucfirst(strtolower($this->first_name)).' '.ucfirst(strtolower($this->middle_name))),
+            get: fn(
+            ) => Str::rtrim(Str::title(Str::lower($this->last_name)).', '.Str::title(Str::lower($this->first_name)).' '.Str::title(Str::lower($this->middle_name))),
+        );
+    }
+
+    /**
+     * Accessor  for the abbreviated rendering doctor.
+     */
+    protected function initials(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => Str::ucfirst(Str::substr($this->last_name, 0,
+                    1)).Str::ucfirst(Str::substr($this->first_name, 0, 1)).Str::ucfirst(Str::substr($this->middle_name, 0, 1)),
         );
     }
 

@@ -3,6 +3,7 @@
 namespace Database\Seeders\Patients;
 
 use Illuminate\Database\Seeder;
+use App\Models\Encounters\Item;
 use App\Models\Patients\Patient;
 use App\Models\Encounters\Encounter;
 
@@ -18,7 +19,14 @@ class PatientSeeder extends Seeder
                     ->count(fake()->randomNumber(1, true))
                     ->create([
                         'pid_enc' => $patient->pid,
-                    ]);
+                    ])
+                    ->each(function ($encounter) {
+                        Item::factory()
+                            ->count(fake()->randomNumber(1, true))
+                            ->create([
+                                'enc_itm' => $encounter->enc,
+                            ]);
+                    });
             });
     }
 }
