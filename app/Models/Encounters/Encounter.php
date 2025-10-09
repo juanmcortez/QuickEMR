@@ -8,6 +8,7 @@ use App\Models\Patients\Patient;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -29,7 +30,7 @@ class Encounter extends Model
      *
      * @var array
      */
-    protected $with = ['rendering_doctor', 'referring_doctor', 'ordering_doctor', 'supervising_doctor'];
+    protected $with = ['rendering_doctor', 'referring_doctor', 'ordering_doctor', 'supervising_doctor', 'items'];
 
     /**
      * The attributes that are mass assignable.
@@ -189,5 +190,17 @@ class Encounter extends Model
     {
         return $this->belongsTo(Doctor::class, 'supervising_id', 'did')
             ->withDefault();
+    }
+
+    /**
+     * Get the items relationship
+     *
+     * @return HasMany
+     */
+    public function items(): HasMany
+    {
+        return $this->hasMany(Item::class, 'enc_itm', 'enc')
+            ->orderBy('code_type')
+            ->orderBy('code');
     }
 }
