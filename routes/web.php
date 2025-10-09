@@ -5,6 +5,7 @@ use App\Http\Controllers\Users\UserController;
 use App\Http\Controllers\Doctors\DoctorController;
 use App\Http\Controllers\Patients\PatientController;
 use App\Http\Controllers\Commons\DashboardController;
+use App\Http\Controllers\Encounters\EncounterController;
 
 /* ********************* */
 /* ***** Dashboard ***** */
@@ -17,6 +18,14 @@ Route::controller(PatientController::class)->group(function () {
     Route::get('/patients/list', 'index')->name('patients.list');
     //
     Route::get('/patient/{patient:pid}/details', 'show')->name('patients.show');
+    //
+});
+
+/* ********************** */
+/* ***** Encounters ***** */
+Route::controller(EncounterController::class)->group(function () {
+    //
+    Route::get('/patient/{patient:pid}/encounter/{encounter:enc}/details', 'show')->name('encounter.show');
     //
 });
 
