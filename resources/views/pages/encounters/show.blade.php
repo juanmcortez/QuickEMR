@@ -1,5 +1,5 @@
 <x-layouts.main>
-    <h2>{{ __('Patient PID :patient', ['patient' => $patient->pid]) }}</h2>
+    <h2>{{ __('Patient :patient | Encounter #:encounter', ['patient' => $patient->profile->full_name, 'encounter' => $encounter->enc]) }}</h2>
     <div>{{ $patient->accession_number_ptlvl }}</div>
     <div>{{ $patient->profile->registration_date }}</div>
     <div>{{ $patient->profile->full_name }}</div>
@@ -9,6 +9,17 @@
     <div>{{ $patient->profile->primary_phone->formatted }}</div>
     <div>{{ $patient->profile->secondary_address->formatted }}</div>
     <div>{{ $patient->profile->secondary_phone->formatted }}</div>
+    <br/>
+    @foreach($patient->subscribers AS $subscriber)
+        <div>{{ $subscriber->companies->name }}</div>
+        <div>{{ $subscriber->companies->payer_id }}</div>
+        <div>{{ $subscriber->effective_date }}</div>
+        <div>{{ $subscriber->termination_date }}</div>
+        <div>{{ $subscriber->type->name }}</div>
+        <div>{{ $subscriber->profile->full_name }}</div>
+        <div>{{ $subscriber->profile->birthdate }}</div>
+        <br/>
+    @endforeach
     <br/>
     <table>
         <thead>
