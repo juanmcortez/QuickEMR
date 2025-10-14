@@ -2,12 +2,12 @@
 
 namespace App\Enum;
 
-enum PhoneType: string
+enum InsuranceType: string
 {
-    case Home = 'home';
-    case Work = 'work';
-    case Mobile = 'mobile';
-    case Fax = 'fax';
+    case Primary = 'primary';
+    case Secondary = 'secondary';
+    case Tertiary = 'tertiary';
+    case SelfPay = 'selfpay';
     case Other = 'other';
 
     // Optional: Helper method to get a random type

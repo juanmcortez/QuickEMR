@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\Users\UserSeeder;
 use Database\Seeders\Doctors\DoctorSeeder;
 use Database\Seeders\Patients\PatientSeeder;
+use Database\Seeders\Insurances\CompanySeeder;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -20,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             DoctorSeeder::class,
+            CompanySeeder::class,
             PatientSeeder::class,
         ]);
     }

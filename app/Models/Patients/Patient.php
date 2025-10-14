@@ -4,6 +4,7 @@ namespace App\Models\Patients;
 
 use App\Models\Commons\Profile;
 use App\Models\Encounters\Encounter;
+use App\Models\Insurances\Subscriber;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -26,7 +27,7 @@ class Patient extends Model
      *
      * @var array
      */
-    protected $with = ['profile', 'encounters'];
+    protected $with = ['profile', 'encounters', 'subscribers'];
 
     /**
      * The attributes that are mass assignable.
@@ -71,5 +72,16 @@ class Patient extends Model
     {
         return $this->hasMany(Encounter::class, 'pid_enc', 'pid')
             ->orderBy('date_of_service', 'desc');
+    }
+
+    /**
+     * Get the subscribers relationship
+     *
+     * @return HasMany
+     */
+    public function subscribers(): HasMany
+    {
+        return $this->hasMany(Subscriber::class, 'pid_sub', 'pid')
+            ->orderBy('type');
     }
 }

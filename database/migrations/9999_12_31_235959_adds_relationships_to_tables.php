@@ -161,10 +161,53 @@ return new class extends Migration {
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
         });
+        //
+        Schema::table('insurances_subscribers', static function (Blueprint $table) {
+            $table
+                ->bigInteger('icd_sub')
+                ->unsigned()
+                ->nullable()
+                ->index()
+                ->after('sub');
+            $table
+                ->bigInteger('pid_sub')
+                ->unsigned()
+                ->nullable()
+                ->index()
+                ->after('icd_sub');
+            $table
+                ->bigInteger('profile_id')
+                ->unsigned()
+                ->nullable()
+                ->index()
+                ->after('pid_sub');
+
+            $table->foreign('icd_sub')
+                ->references('icd')
+                ->on('insurances_companies')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->foreign('pid_sub')
+                ->references('pid')
+                ->on('patients')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->foreign('profile_id')
+                ->references('id')
+                ->on('commons_profiles')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+        });
     }
 
     public function down(): void
     {
+        Schema::table('insurances_subscribers', static function (Blueprint $table) {
+            $table->dropForeign('insurances_subscribers_icd_sub_foreign');
+            $table->dropForeign('insurances_subscribers_pid_sub_foreign');
+            $table->dropForeign('insurances_subscribers_profile_id_foreign');
+        });
+        //
         Schema::table('encounters_items', static function (Blueprint $table) {
             $table->dropForeign('encounters_items_enc_itm_foreign');
         });
