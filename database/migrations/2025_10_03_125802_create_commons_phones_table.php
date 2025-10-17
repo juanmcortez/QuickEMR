@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->id();
             //
             $table->boolean('is_primary')->default(false);
-            $table->enum('type', PhoneType::values())->nullable();
+            $table->enum('type', PhoneType::values())->default(PhoneType::Mobile->value);
             //
             $table->string('country_code', 8)->default('+54 9')->nullable();
             //

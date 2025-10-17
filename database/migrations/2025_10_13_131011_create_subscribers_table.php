@@ -12,7 +12,7 @@ return new class extends Migration {
         Schema::create('insurances_subscribers', function (Blueprint $table) {
             $table->id('sub');
             //
-            $table->enum('type', InsuranceType::values())->default('primary');
+            $table->enum('type', InsuranceType::values())->default(InsuranceType::Primary->value);
             $table->timestamp('effective_date')->default(Carbon::now());
             $table->timestamp('termination_date')->nullable();
             //
