@@ -13,7 +13,7 @@ class PatientSeeder extends Seeder
     public function run(): void
     {
         Patient::factory()
-            ->count(fake()->randomNumber(3))
+            ->count(fake()->randomNumber(2))
             ->create()
             ->each(function ($patient) {
                 //

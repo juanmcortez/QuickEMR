@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Database\Seeders\Users\UserSeeder;
+use Database\Seeders\Codes\CustomSeeder;
 use Database\Seeders\Doctors\DoctorSeeder;
 use Database\Seeders\Patients\PatientSeeder;
 use Database\Seeders\Insurances\CompanySeeder;
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             DoctorSeeder::class,
             CompanySeeder::class,
+            CustomSeeder::class,
             PatientSeeder::class,
         ]);
     }
