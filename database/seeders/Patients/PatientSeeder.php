@@ -2,6 +2,7 @@
 
 namespace Database\Seeders\Patients;
 
+use App\Models\Codes\Custom;
 use Illuminate\Database\Seeder;
 use App\Models\Encounters\Item;
 use App\Models\Patients\Patient;
@@ -13,7 +14,7 @@ class PatientSeeder extends Seeder
     public function run(): void
     {
         Patient::factory()
-            ->count(fake()->randomNumber(3))
+            ->count(fake()->randomNumber(2))
             ->create()
             ->each(function ($patient) {
                 //
@@ -41,7 +42,18 @@ class PatientSeeder extends Seeder
                             ->count(fake()->randomNumber(1, true))
                             ->create([
                                 'enc_itm' => $encounter->enc,
-                            ]);
+                            ])->each(function ($item) {
+                                $customcode = Custom::where('type', 'cpt4')
+                                    ->orWhere('type', 'anes')
+                                    ->orWhere('type', 'hcpcs')
+                                    ->inRandomOrder()
+                                    ->first();
+                                $item->update([
+                                    'code' => $customcode->id,
+                                    'fee' => $customcode->default_fee,
+                                    'units' => $customcode->default_units,
+                                ]);
+                            });
                     });
             });
     }

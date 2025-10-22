@@ -10,8 +10,6 @@ return new class extends Migration {
         Schema::create('encounters_items', function (Blueprint $table) {
             $table->id('itm');
             //
-            $table->string('code_type', 32)->default('CPT4');
-            $table->string('code', 32)->default('00001');
             $table->decimal('fee', 10, 2)->default(0);
             $table->integer('units')->default(1);
             //

@@ -16,7 +16,7 @@ class SubscriberFactory extends Factory
     public function definition(): array
     {
         return [
-            'type' => InsuranceType::random(),
+            'type' => InsuranceType::random()->value,
             'effective_date' => fake()->dateTimeBetween('-2 years', '-1 day'),
             'termination_date' => null,
             //

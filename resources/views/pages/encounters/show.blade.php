@@ -80,7 +80,7 @@
     <table width="50%">
         <thead align="center">
         <tr>
-            <th colspan="2">Code</th>
+            <th>Code</th>
             <th>&nbsp;</th>
             <th>Fee</th>
             <th>&nbsp;</th>
@@ -91,8 +91,7 @@
         <tbody align="center">
         @foreach($encounter->items as $item)
             <tr>
-                <td>{{ $item->code_type }}</td>
-                <td>{{ $item->code }}</td>
+                <td>{{ $item->code_detail->type->name }} {{ $item->code_detail->code }}</td>
                 <td>&nbsp;</td>
                 <td>{{ $item->fee }}</td>
                 <td>&nbsp;</td>

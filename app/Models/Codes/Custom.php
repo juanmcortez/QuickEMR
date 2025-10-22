@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Models\Encounters;
+namespace App\Models\Codes;
 
-use App\Models\Codes\Custom;
+use App\Enum\CodeType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Item extends Model
+class Custom extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -18,21 +17,7 @@ class Item extends Model
      *
      * @var string
      */
-    protected $table = 'encounters_items';
-
-    /**
-     * The primary key associated with the table.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'itm';
-
-    /**
-     * The relationships that should always be loaded.
-     *
-     * @var array
-     */
-    protected $with = ['code_detail'];
+    protected $table = 'codes_custom_list';
 
     /**
      * The attributes that are mass assignable.
@@ -40,8 +25,14 @@ class Item extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'fee',
-        'units',
+        'type',
+        'code',
+        'code_short',
+        'description',
+        'default_modifier',
+        'default_ndc',
+        'default_units',
+        'default_fee',
     ];
 
     /**
@@ -50,9 +41,7 @@ class Item extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        'itm',
-        'enc_itm',
-        'code',
+        'id',
         'created_at',
         'updated_at',
         'deleted_at'
@@ -66,28 +55,19 @@ class Item extends Model
     protected function casts(): array
     {
         return [
-            'fee' => 'decimal:2',
-            'units' => 'integer',
+            'type' => CodeType::class,
+            'default_units' => 'integer',
+            'default_fee' => 'decimal:2',
         ];
     }
 
     /**
      * Accessor / mutator for the date of discharge.
      */
-    protected function fee(): ?Attribute
+    protected function defaultFee(): ?Attribute
     {
         return Attribute::make(
             get: static fn($value) => '$'.number_format($value, 2, ',', '.'),
         );
-    }
-
-    /**
-     * Get the items relationship
-     *
-     * @return HasOne
-     */
-    public function code_detail(): HasOne
-    {
-        return $this->hasOne(Custom::class, 'id', 'code');
     }
 }
