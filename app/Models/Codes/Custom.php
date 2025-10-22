@@ -64,7 +64,7 @@ class Custom extends Model
     /**
      * Accessor / mutator for the date of discharge.
      */
-    protected function fee(): ?Attribute
+    protected function defaultFee(): ?Attribute
     {
         return Attribute::make(
             get: static fn($value) => '$'.number_format($value, 2, ',', '.'),

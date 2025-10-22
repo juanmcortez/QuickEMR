@@ -2,9 +2,11 @@
 
 namespace App\Models\Encounters;
 
+use App\Models\Codes\Custom;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Item extends Model
@@ -26,13 +28,18 @@ class Item extends Model
     protected $primaryKey = 'itm';
 
     /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['code_detail'];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'code_type',
-        'code',
         'fee',
         'units',
     ];
@@ -45,6 +52,7 @@ class Item extends Model
     protected $hidden = [
         'itm',
         'enc_itm',
+        'code',
         'created_at',
         'updated_at',
         'deleted_at'
@@ -71,5 +79,15 @@ class Item extends Model
         return Attribute::make(
             get: static fn($value) => '$'.number_format($value, 2, ',', '.'),
         );
+    }
+
+    /**
+     * Get the items relationship
+     *
+     * @return HasOne
+     */
+    public function code_detail(): HasOne
+    {
+        return $this->hasOne(Custom::class, 'id', 'code');
     }
 }

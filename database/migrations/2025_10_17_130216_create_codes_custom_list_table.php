@@ -18,9 +18,9 @@ return new class extends Migration {
             //
             $table->string('default_modifier')->nullable();
             $table->string('default_ndc')->nullable();
-            $table->integer('default_units')->default(1);
             //
-            $table->decimal('default_fee')->default(0);
+            $table->decimal('default_fee', 10, 2)->default(0);
+            $table->integer('default_units')->default(1);
             //
             $table->timestamps();
             $table->softDeletes();

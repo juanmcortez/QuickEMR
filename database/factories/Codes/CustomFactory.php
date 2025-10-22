@@ -13,7 +13,7 @@ class CustomFactory extends Factory
 
     public function definition(): array
     {
-        $code_type = CodeType::random()->value;
+        $code_type = CodeType::randomProcedureCode()->value;
         $fake_ndc = '0000'.fake()->randomNumber(1, true).'-'.fake()->randomNumber(4, true).'-'.fake()->randomNumber(2, true);
         //
         return [
@@ -24,7 +24,7 @@ class CustomFactory extends Factory
             'default_modifier' => null,
             'default_ndc' => ($code_type === 'hcpcs') ? $fake_ndc : null,
             'default_units' => $this->faker->randomNumber(1, true),
-            'default_fee' => $this->faker->randomFloat(2, 10, 9999),
+            'default_fee' => $this->faker->randomFloat(2, 0.01, 199.99),
         ];
     }
 }

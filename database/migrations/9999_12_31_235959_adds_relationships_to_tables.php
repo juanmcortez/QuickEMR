@@ -154,10 +154,21 @@ return new class extends Migration {
                 ->nullable()
                 ->index()
                 ->after('itm');
+            $table
+                ->bigInteger('code')
+                ->unsigned()
+                ->nullable()
+                ->index()
+                ->after('enc_itm');
 
             $table->foreign('enc_itm')
                 ->references('enc')
                 ->on('encounters')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->foreign('code')
+                ->references('id')
+                ->on('codes_custom_list')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
         });
@@ -210,6 +221,7 @@ return new class extends Migration {
         //
         Schema::table('encounters_items', static function (Blueprint $table) {
             $table->dropForeign('encounters_items_enc_itm_foreign');
+            $table->dropForeign('encounters_items_code_foreign');
         });
         //
         Schema::table('encounters', static function (Blueprint $table) {

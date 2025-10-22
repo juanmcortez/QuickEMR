@@ -52,6 +52,10 @@ class Encounter extends Model
      */
     protected $hidden = [
         'pid_enc',
+        'rendering_id',
+        'referring_id',
+        'ordering_id',
+        'supervising_id',
         'updated_at',
         'deleted_at'
     ];
@@ -199,8 +203,6 @@ class Encounter extends Model
      */
     public function items(): HasMany
     {
-        return $this->hasMany(Item::class, 'enc_itm', 'enc')
-            ->orderBy('code_type')
-            ->orderBy('code');
+        return $this->hasMany(Item::class, 'enc_itm', 'enc');
     }
 }
