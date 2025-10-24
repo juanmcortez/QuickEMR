@@ -50,6 +50,8 @@
 @endif
 {{-- ERRORS --}}
 
+<x-layouts.parts.header/>
+
 {{ $slot }}
 </body>
 </html>
