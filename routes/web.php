@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Users\UserController;
+use App\Http\Controllers\Codes\CustomController;
 use App\Http\Controllers\Doctors\DoctorController;
 use App\Http\Controllers\Patients\PatientController;
 use App\Http\Controllers\Commons\DashboardController;
@@ -26,6 +27,16 @@ Route::controller(PatientController::class)->group(function () {
 Route::controller(EncounterController::class)->group(function () {
     //
     Route::get('/patient/{patient:pid}/encounter/{encounter:enc}/details', 'show')->name('encounter.show');
+    //
+});
+
+/* ************************ */
+/* ***** Custom Codes ***** */
+Route::controller(CustomController::class)->group(function () {
+    //
+    Route::get('/master/codes/list', 'index')->name('custom.list');
+    //
+    Route::get('/master/code/{custom}/details', 'show')->name('custom.show');
     //
 });
 

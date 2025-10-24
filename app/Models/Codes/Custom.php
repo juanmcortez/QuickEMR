@@ -70,4 +70,26 @@ class Custom extends Model
             get: static fn($value) => '$'.number_format($value, 2, ',', '.'),
         );
     }
+
+    /**
+     * Retrieve the model via keybinding multiple columns.
+     * This allows for URLs to be like /master/code/cpt4:49669/details
+     * The cpt4:49669 is binding the model
+     *
+     * @param $value
+     * @param $field
+     * @return Model|null
+     */
+    public function resolveRouteBinding($value, $field = null): ?Model
+    {
+        // Split the value by a delimiter (e.g., hyphen)
+        $parts = explode(config('defaults.slug_split'), $value);
+        if (count($parts) !== 2) {
+            return null;
+        }
+        [$column1Value, $column2Value] = $parts;
+        return $this->where('type', $column1Value)
+            ->where('code', $column2Value)
+            ->firstOrFail();
+    }
 }
