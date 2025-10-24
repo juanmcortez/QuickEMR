@@ -7,6 +7,9 @@
             <a href="{{ route('patients.list') }}">{{ __('Patients') }}</a>
         </li>
         <li>
+            <a href="{{ route('custom.list') }}">{{ __('Codes') }}</a>
+        </li>
+        <li>
             <a href="{{ route('doctors.list') }}">{{ __('Doctors') }}</a>
         </li>
         <li>
