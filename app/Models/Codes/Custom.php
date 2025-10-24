@@ -62,12 +62,19 @@ class Custom extends Model
     }
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['formatted_default_fee'];
+
+    /**
      * Accessor / mutator for the date of discharge.
      */
-    protected function defaultFee(): ?Attribute
+    protected function formattedDefaultFee(): ?Attribute
     {
         return Attribute::make(
-            get: static fn($value) => '$'.number_format($value, 2, ',', '.'),
+            get: fn($value) => '$'.number_format($this->default_fee, 2, ',', '.'),
         );
     }
 

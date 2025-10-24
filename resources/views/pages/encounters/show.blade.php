@@ -93,7 +93,7 @@
             <tr>
                 <td>{{ $item->code_detail->type->name }} {{ $item->code_detail->code }}</td>
                 <td>&nbsp;</td>
-                <td>{{ $item->fee }}</td>
+                <td>{{ $item->formatted_fee }}</td>
                 <td>&nbsp;</td>
                 <td>{{ $item->units }}</td>
                 <td>&nbsp;</td>

@@ -72,12 +72,19 @@ class Item extends Model
     }
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['formatted_fee'];
+
+    /**
      * Accessor / mutator for the date of discharge.
      */
-    protected function fee(): ?Attribute
+    protected function formattedFee(): ?Attribute
     {
         return Attribute::make(
-            get: static fn($value) => '$'.number_format($value, 2, ',', '.'),
+            get: fn($value) => '$'.number_format($this->fee, 2, ',', '.'),
         );
     }
 

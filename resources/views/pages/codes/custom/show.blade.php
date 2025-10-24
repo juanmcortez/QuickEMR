@@ -6,6 +6,6 @@
     <div>{{ $custom->description }}</div>
     <div>{{ $custom->default_modifier }}</div>
     <div>{{ $custom->default_ndc }}</div>
-    <div>{{ $custom->default_fee }}</div>
+    <div>{{ $custom->default_fee }} -> {{ $custom->formatted_default_fee }}</div>
     <div>{{ $custom->default_units }}</div>
 </x-layouts.main>
