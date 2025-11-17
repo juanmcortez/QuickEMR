@@ -6,7 +6,7 @@
 |------------------|--------------------|
 | PHP v8.2         | :white_check_mark: |
 | MySQL            | :white_check_mark: |
-| Laravel v12.37.0 | :white_check_mark: |
+| Laravel v12.38.1 | :white_check_mark: |
 
 ## Reporting a Vulnerability
 
